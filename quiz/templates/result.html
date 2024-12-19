@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результат</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="result-container">
+        <h1>Результат викторины</h1>
+        <p>Вы ответили правильно на {{ score }} из {{ total_questions }} вопросов.</p>
+        <form action="{{ url_for('result') }}" method="POST">
+            <input type="hidden" name="score" value="{{ score }}">
+            <input type="hidden" name="total_questions" value="{{ total_questions }}">
+            <button type="submit" class="submit-btn">Отправить ответы</button>
+        </form>
+        <a href="{{ url_for('index') }}">
+            <button class="start-btn">Вернуться на главную</button>
+        </a>
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,55 @@
+[
+    {
+        "question": "Какой язык программирования наиболее популярен в 2023 году?",
+        "options": ["JavaScript", "Python", "Java", "C#"],
+        "answer": "JavaScript"
+    },
+    {
+        "question": "Какой язык программирования используется для веб-разработки?",
+        "options": ["Java", "C++", "HTML", "Python"],
+        "answer": "HTML"
+    },
+    {
+        "question": "Какой язык программирования часто используется для анализа данных?",
+        "options": ["R", "Java", "C++", "Python"],
+        "answer": "Python"
+    },
+    {
+        "question": "Какой язык программирования используется для разработки мобильных приложений на Android?",
+        "options": ["Swift", "Kotlin", "Java", "Objective-C"],
+        "answer": "Kotlin"
+    },
+    {
+        "question": "Какой язык программирования используется для разработки мобильных приложений на iOS?",
+        "options": ["Swift", "Kotlin", "Java", "Objective-C"],
+        "answer": "Swift"
+    },
+    {
+        "question": "Какой язык программирования часто используется для разработки игр?",
+        "options": ["C#", "JavaScript", "Python", "Ruby"],
+        "answer": "C#"
+    },
+    {
+        "question": "Какой язык программирования используется для разработки системного ПО?",
+        "options": ["C", "Java", "Python", "Ruby"],
+        "answer": "C"
+    },
+    {
+        "question": "Какой язык программирования используется для разработки веб-приложений на сервере?",
+        "options": ["Node.js", "PHP", "Ruby", "Python"],
+        "answer": "Node.js"
+    },
+    {
+        "question": "Какой язык программирования используется для разработки искусственного интеллекта?",
+        "options": ["Python", "Java", "C++", "Ruby"],
+        "answer": "Python"
+    },
+    {
+        "question": "Какой язык программирования используется для разработки блокчейн-приложений?",
+        "options": ["Solidity", "Java", "C++", "Python"],
+        "answer": "Solidity"
+    }
+
+
+    
+]

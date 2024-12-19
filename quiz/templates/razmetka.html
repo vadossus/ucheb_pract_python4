@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="question" id="question"></div>
+        <ul class="options" id="options"></ul>
+        <button class="submit-btn" onclick="checkAnswer()">Отправить</button>
+    </div>
+
+    <script>
+        let quizQuestions = JSON.parse('{{ questions_json | safe }}');
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let totalQuestions = JSON.parse('{{ total_questions | safe }}')
+
+        console.log("Quiz Questions:", quizQuestions);
+        console.log("Total Questions:", totalQuestions);
+
+        function loadQuestion() {
+            console.log("Loading question:", currentQuestionIndex);
+            let questionElement = document.getElementById("question");
+            let optionsElement = document.getElementById("options");
+            let currentQuestion = quizQuestions[currentQuestionIndex];
+
+            questionElement.textContent = currentQuestion.question;
+            optionsElement.innerHTML = '';
+
+            currentQuestion.options.forEach((option, index) => {
+                let li = document.createElement("li");
+                let input = document.createElement("input");
+                input.type = "radio";
+                input.id = "option" + (index + 1);
+                input.name = "quiz";
+                input.value = option;
+
+                let label = document.createElement("label");
+                label.htmlFor = "option" + (index + 1);
+                label.textContent = option;
+
+                li.appendChild(input);
+                li.appendChild(label);
+                optionsElement.appendChild(li);
+            });
+        }
+
+        function checkAnswer() {
+            let selectedOption = document.querySelector('input[name="quiz"]:checked');
+            if (selectedOption) {
+                fetch('/check_answer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        question_index: currentQuestionIndex,
+                        selected_option: selectedOption.value
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.correct) {
+                        score++;
+                    }
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < quizQuestions.length) {
+                        loadQuestion();
+                    } else {
+                        redirectToResult();
+                    }
+                });
+            }
+        }
+
+        function redirectToResult() {
+            let form = document.createElement('form');
+            form.action = "/result";
+            form.method = "post";
+            form.style.display = "none";
+
+            let scoreInput = document.createElement('input');
+            scoreInput.type = "hidden";
+            scoreInput.name = "score";
+            scoreInput.value = score;
+
+            let totalQuestionsInput = document.createElement('input');
+            totalQuestionsInput.type = "hidden";
+            totalQuestionsInput.name = "total_questions";
+            totalQuestionsInput.value = totalQuestions;
+
+            form.appendChild(scoreInput);
+            form.appendChild(totalQuestionsInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        window.onload = function() {
+            loadQuestion();
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
